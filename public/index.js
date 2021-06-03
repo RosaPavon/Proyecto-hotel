@@ -123,7 +123,7 @@ function editar(indice) {
       feedback("Error al realizar la reserva");
   
     }else{
-      document.getElementById("feedback").innerHTML =`<p>Reserva realizada oki doki</p>`
+      document.getElementById("feedback").innerHTML =`<p>Reserva realizada</p>`
       console.log(data.contenido)
     }
     })
