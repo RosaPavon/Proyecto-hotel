@@ -111,7 +111,7 @@ function editar(indice) {
   },
   body: JSON.stringify({
 
-  room:parseInt(document.getElementById("room").value),
+  room:document.getElementById("room").value,
   dni: document.getElementById("buscar").value,
   in: document.getElementById("fechain").value,
   
@@ -121,8 +121,10 @@ function editar(indice) {
   .then(function(data){
     if (data.err) {
       feedback("Error al realizar la reserva");
+  
     }else{
       document.getElementById("feedback").innerHTML =`<p>Reserva realizada oki doki</p>`
+      console.log(data.contenido)
     }
     })
 }
