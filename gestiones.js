@@ -20,6 +20,29 @@ router.post("/checkin", function (req, res) {
                        if(err !== null){
                          res.send({mensaje: "Error al registrar la reserva"} )
                        }else{
+                        req.app.locals.db.collection("habitaciones").updateOne({ room: req.body.room },{$set: {
+                             estado: "ocupada" 
+                           },
+                         },
+                         function (error, datos) {
+                           if (error !== null) {
+                             console.log(error);
+                             res.send({ mensaje: "Ha habido un error" + error });
+                           } else {//si no creamos ahora un if no damos feedback al usuario si no encontramos al usuario en la base
+                             if(datos.matcheCount !=1 ){
+                             if(datos.modifiedCount==1){
+                               res.send({error:false, mensaje:"Habitación"})
+                     
+                             }else{
+                               res.send({error:false, mensaje:"no se ha podido actualizar"})
+                     
+                             }
+                           }else{
+                             res.send({error:false, mensaje:"habitación no encontrado"})
+                           }
+                           }
+                         }
+                       );
                          res.send({contenido:data, mensaje: "Reserva realizada"})
                        }
                      })
